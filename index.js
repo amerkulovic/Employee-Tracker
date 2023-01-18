@@ -2,15 +2,13 @@ const inquirer = require("inquirer");
 const mysql = require("mysql2");
 const consoleTable = require("console.table");
 
-const db = mysql.createConnection(
-  {
-    host: "localhost",
-    user: "root",
-    password: "Larrybird33",
-    database: "tracker",
-  },
-  console.log(`Connected to the tracker database.`)
-);
+const db = mysql.createConnection({
+  host: "localhost",
+  user: "root",
+  password: "Larrybird33",
+  database: "tracker",
+});
+
 viewDepartments = () => {
   db.query("SELECT * FROM department", function (err, results) {
     console.table(results);

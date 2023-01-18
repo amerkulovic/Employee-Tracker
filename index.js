@@ -27,7 +27,7 @@ viewRoles = () => {
 };
 
 viewEmployees = () => {
-  db.query("SELECT * FROM employee", function (err, results) {
+  db.query("SELECT * FROM employee INNER JOIN role ON employee.role_id=role.id;", function (err, results) {
     console.table(results);
   });
 };

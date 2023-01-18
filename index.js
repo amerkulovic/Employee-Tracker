@@ -50,6 +50,52 @@ addDepartment = () => {
     });
 };
 
+addRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the role name?",
+        name: "roleName",
+      },
+      {
+        type: "input",
+        message: "What is the role salary?",
+        name: "roleSalary",
+      },
+      {
+        type: "input",
+        message: "What is the role department?",
+        name: "roleDepartment",
+      },
+    ])
+    .then((answer) => {
+      db.connect(function (err) {
+        db.query(`INSERT INTO role (title, salary, department_id) VALUES ('${answer.roleName}', '${answer.roleSalary}', ${answer.roleDepartment})`, function (err, result) {
+          console.table("Successfully added!");
+        });
+      });
+    });
+};
+
+addEmployee = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the Department name?",
+        name: "departmentName",
+      },
+    ])
+    .then((answer) => {
+      db.connect(function (err) {
+        db.query(`INSERT INTO department (name) VALUES ('${answer.departmentName}')`, function (err, result) {
+          console.table("Successfully added!");
+        });
+      });
+    });
+};
+
 function viewFile() {
   inquirer
     .prompt([
@@ -69,6 +115,10 @@ function viewFile() {
         viewEmployees();
       } else if (data.choice === "Add a Department") {
         addDepartment();
+      } else if (data.choice === "Add a Role") {
+        addRole();
+      } else if (data.choice === "Add a Employee") {
+        addEmployee();
       }
     });
 }

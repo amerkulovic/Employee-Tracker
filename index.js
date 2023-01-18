@@ -16,7 +16,19 @@ const db = mysql.createConnection(
 );
 viewDepartments = () => {
   db.query("SELECT * FROM department", function (err, results) {
-    console.log(results);
+    console.table(results);
+  });
+};
+
+viewRoles = () => {
+  db.query("SELECT * FROM role", function (err, results) {
+    console.table(results);
+  });
+};
+
+viewEmployees = () => {
+  db.query("SELECT * FROM employee", function (err, results) {
+    console.table(results);
   });
 };
 
@@ -34,6 +46,10 @@ function viewFile() {
       console.log(data);
       if (data.choice === "View All Departments") {
         viewDepartments();
+      } else if (data.choice === "View All Roles") {
+        viewRoles();
+      } else if (data.choice === "View All Employees") {
+        viewEmployees();
       }
     });
 }

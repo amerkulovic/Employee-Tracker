@@ -1,6 +1,6 @@
 const inquirer = require("inquirer");
 const express = require("express");
-const mySql = require("mysql2");
+const mysql = require("mysql2");
 const consoleTable = require("console.table");
 
 const db = mysql.createConnection(
@@ -14,6 +14,11 @@ const db = mysql.createConnection(
   },
   console.log(`Connected to the tracker database.`)
 );
+viewDepartments = () => {
+  db.query("SELECT * FROM department", function (err, results) {
+    console.log(results);
+  });
+};
 
 function viewFile() {
   inquirer
@@ -27,8 +32,8 @@ function viewFile() {
     ])
     .then((data) => {
       console.log(data);
-      if (data.choice === "View All Roles") {
-        console.log("Dumbo");
+      if (data.choice === "View All Departments") {
+        viewDepartments();
       }
     });
 }

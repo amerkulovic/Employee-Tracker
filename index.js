@@ -117,7 +117,12 @@ updateRole = () => {
       {
         type: "input",
         message: "What is the first name of the employee who's role you want to change?",
-        name: "employeeCurrentRole",
+        name: "employeeFirstName",
+      },
+      {
+        type: "input",
+        message: "What is the last name of the employee who's role you want to change?",
+        name: "employeeLastName",
       },
       {
         type: "input",
@@ -127,7 +132,7 @@ updateRole = () => {
     ])
     .then((answer) => {
       db.connect(function (err) {
-        db.query(`UPDATE employee SET role_id = '${answer.employeeNewRole}' WHERE first_name = '${answer.employeeCurrentRole}'`, function (err, result) {
+        db.query(`UPDATE employee SET role_id = '${answer.employeeNewRole}' WHERE first_name = '${answer.employeeFirstName}' AND last_name = '${answer.employeeLastName}'`, function (err, result) {
           console.log(result.affectedRows + " record(s) updated");
         });
       });

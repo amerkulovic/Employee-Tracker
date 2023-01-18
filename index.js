@@ -83,13 +83,28 @@ addEmployee = () => {
     .prompt([
       {
         type: "input",
-        message: "What is the Department name?",
-        name: "departmentName",
+        message: "What is the employee's first name?",
+        name: "employeeFirstName",
+      },
+      {
+        type: "input",
+        message: "What is the employee's last name?",
+        name: "employeeLastName",
+      },
+      {
+        type: "input",
+        message: "What is the employee's role id?",
+        name: "employeeRole",
+      },
+      {
+        type: "input",
+        message: "Who is the employee's manager id?",
+        name: "employeeManager",
       },
     ])
     .then((answer) => {
       db.connect(function (err) {
-        db.query(`INSERT INTO department (name) VALUES ('${answer.departmentName}')`, function (err, result) {
+        db.query(`INSERT INTO employee (first_name, last_name, role_id, manager_id) VALUES ('${answer.employeeFirstName}', '${answer.employeeLastName}', '${answer.employeeRole}', '${answer.employeeManager}')`, function (err, result) {
           console.table("Successfully added!");
         });
       });
@@ -117,7 +132,7 @@ function viewFile() {
         addDepartment();
       } else if (data.choice === "Add a Role") {
         addRole();
-      } else if (data.choice === "Add a Employee") {
+      } else if (data.choice === "Add an Employee") {
         addEmployee();
       }
     });

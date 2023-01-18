@@ -32,6 +32,24 @@ viewEmployees = () => {
   });
 };
 
+addDepartment = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the Department name?",
+        name: "departmentName",
+      },
+    ])
+    .then((answer) => {
+      db.connect(function (err) {
+        db.query(`INSERT INTO department (name) VALUES ('${answer.departmentName}')`, function (err, result) {
+          console.table("Successfully added!");
+        });
+      });
+    });
+};
+
 function viewFile() {
   inquirer
     .prompt([
@@ -39,17 +57,18 @@ function viewFile() {
         type: "list",
         message: "What would you like to view?",
         name: "choice",
-        choices: ["View All Departments", "View All Roles", "View All Employees", "Add a Role", "Add an Employee", "Update a Role"],
+        choices: ["View All Departments", "View All Roles", "View All Employees", "Add a Department", "Add a Role", "Add an Employee", "Update a Role"],
       },
     ])
     .then((data) => {
-      console.log(data);
       if (data.choice === "View All Departments") {
         viewDepartments();
       } else if (data.choice === "View All Roles") {
         viewRoles();
       } else if (data.choice === "View All Employees") {
         viewEmployees();
+      } else if (data.choice === "Add a Department") {
+        addDepartment();
       }
     });
 }

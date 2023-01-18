@@ -111,7 +111,30 @@ addEmployee = () => {
     });
 };
 
-function viewFile() {
+updateRole = () => {
+  inquirer
+    .prompt([
+      {
+        type: "input",
+        message: "What is the first name of the employee who's role you want to change?",
+        name: "employeeCurrentRole",
+      },
+      {
+        type: "input",
+        message: "What should the employee's role ID be changed to?",
+        name: "employeeNewRole",
+      },
+    ])
+    .then((answer) => {
+      db.connect(function (err) {
+        db.query(`UPDATE employee SET role_id = '${answer.employeeNewRole}' WHERE first_name = '${answer.employeeCurrentRole}'`, function (err, result) {
+          console.log(result.affectedRows + " record(s) updated");
+        });
+      });
+    });
+};
+
+function init() {
   inquirer
     .prompt([
       {
@@ -134,8 +157,10 @@ function viewFile() {
         addRole();
       } else if (data.choice === "Add an Employee") {
         addEmployee();
+      } else {
+        updateRole();
       }
     });
 }
 
-viewFile();
+init();

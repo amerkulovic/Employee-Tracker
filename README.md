@@ -1,7 +1,8 @@
 # Employee-Tracker
 
 ## Overview
-A tracking application that allows you to see your team and the roles they work in using SQL. You can update and add new roles, employees, or departments as well. 
+
+A tracking application that allows you to see your team and the roles they work in using SQL. You can update and add new roles, employees, or departments as well.
 
 ## Skills
 
@@ -16,4 +17,4 @@ A tracking application that allows you to see your team and the roles they work 
 
 ## Video
 
-![Watch the video]("README Video")
+![Watch the video](/Employee%20Tracker.mov "README Video")
